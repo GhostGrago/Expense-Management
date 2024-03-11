@@ -2,7 +2,7 @@
 
 ## Description:
 
-A back-end management system with RESTful api to keep track with every family's earnings and expenses.
+A back-end management system with RESTful API to keep track with every personal earnings and expenses.
 
 ## Introduction:
 
