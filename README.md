@@ -1,4 +1,4 @@
-# Family Money Tracker
+# Expense Management Personal Project
 
 ## Description:
 
