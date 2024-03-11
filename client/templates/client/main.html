@@ -1,0 +1,843 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Client</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Tilt+Prism&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/9f0dc4de76.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'client/styles.css' %}" />
+  </head>
+  <body>
+    <div id="authenticated" class="container-fluid">
+      <div class="row flex-nowrap">
+        <!-- Nav Bar -->
+        <div
+          class="bg-dark col-auto col-md-3 col-lg-2 min-vh-100 d-flex flex-column justify-content-between"
+        >
+          <div class="bg-dark p-2">
+            <a
+              class="d-flex text-decoration-none mt-1 text-white align-items-center"
+            >
+              <span class="fs-2 d-none d-sm-inline text-success pb-1 name">
+              </span>
+            </a>
+            <a
+              class="d-flex text-decoration-none text-white align-items-center"
+            >
+              <span class="fs-6 d-none d-sm-inline subtitle"></span>
+            </a>
+            <ul class="nav nav-pills flex-column mt-4">
+              <li class="nav-item py-2 py-sm-1 ps-1">
+                <a
+                  class="nav-link text-white profile"
+                  data-page="right-screen-your-tracker"
+                >
+                  <i class="fa fas fa-user-tie fs-5">
+                    <span class="fs-4 ms-3 d-none d-sm-inline">
+                      Your Tracker</span
+                    >
+                  </i>
+                </a>
+              </li>
+              <li class="nav-item py-2 py-sm-1">
+                <a
+                  class="nav-link text-white family"
+                  data-page="right-screen-members"
+                >
+                  <i class="fa fas fa-house-user fs-5">
+                    <span class="fs-4 ms-3 d-none d-sm-inline">Members</span>
+                  </i>
+                </a>
+              </li>
+              <li class="nav-item py-2 py-sm-1">
+                <a
+                  class="nav-link text-white collective-report"
+                  data-page="right-screen-collective"
+                >
+                  <i class="fa fas fa-people-carry fs-5">
+                    <span
+                      class="fs-4 d-none d-sm-inline"
+                      style="margin-left: 8px"
+                      >Family Report</span
+                    >
+                  </i>
+                </a>
+              </li>
+              <li class="nav-item py-2 py-sm-1 p-1">
+                <a
+                  class="nav-link text-white individual-report"
+                  data-page="right-screen-individual"
+                >
+                  <i class="fa fas fa-solid fa-child fs-5">
+                    <span class="fs-4 ms-3 d-none d-sm-inline"
+                      >Individual Report</span
+                    >
+                  </i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-bottom">
+            <a
+              class="d-flex text-decoration-none mt-1 text-secondary align-items-center p-1"
+              href="#"
+              data-page="right-screen-contact"
+            >
+              <span class="fs-4 d-none d-sm-inline ms-2"> Contact Us </span>
+            </a>
+            <a
+              class="d-flex text-decoration-none mt-1 text-secondary align-items-center p-1"
+              href="../../admin/"
+              target="_blank"
+            >
+              <span class="fs-4 d-none d-sm-inline ms-2"> Admin </span>
+            </a>
+            <a
+              class="d-flex text-decoration-none mt-1 text-warning align-items-center p-1 pb-3"
+              href="../"
+            >
+              <span class="fs-4 d-none d-sm-inline ms-2"> Logout </span>
+            </a>
+          </div>
+        </div>
+        <!-- Main Content -->
+        <!-- Collective Report -->
+        <div
+          id="right-screen-collective"
+          class="col-sm-10 col-lg-10 p-0 right-screen"
+        >
+          <form class="filtering filtering-collective d-flex flex-row">
+            <div class="mb-3 me-2">
+              <label for="yearSelectCollective" class="form-label"
+                >Select Year</label
+              >
+              <select class="form-select" id="yearSelectCollective">
+                <option value="">All</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+            <div class="mb-3 me-2">
+              <label for="monthSelectCollective" class="form-label"
+                >Select Month</label
+              >
+              <select class="form-select" id="monthSelectCollective">
+                <option value="">All</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary submit-filter">
+                Filter
+              </button>
+            </div>
+          </form>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 33vh;
+              margin-right: 1rem;
+              margin-top: 3rem;
+              margin-bottom: 6rem;
+            "
+          >
+            <h1>Earnings By Categories</h1>
+            <canvas id="chart-income"></canvas>
+            <h4 class="text-center" id="total-earnings"></h4>
+          </div>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 33vh;
+              margin-top: 3rem;
+              margin-bottom: 6rem;
+            "
+          >
+            <h1>Expenses By Categories</h1>
+            <canvas id="chart-expenses"></canvas>
+            <h4 class="text-center" id="total-expenses"></h4>
+          </div>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 40vh;
+              margin-right: 1rem;
+              margin-top: 1rem;
+            "
+          >
+            <h1>Earnings By Members</h1>
+            <canvas id="chart-income-per-person"></canvas>
+            <h4 class="text-center" id="total-earnings-by-person"></h4>
+          </div>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 40vh;
+              margin-top: 1rem;
+              padding-right: 0%;
+            "
+          >
+            <h1>Expenses By Members</h1>
+            <canvas id="chart-expenses-per-person"></canvas>
+            <h4 class="text-center" id="total-expenses-by-person"></h4>
+          </div>
+          <div
+            class="container-fluid d-flex justify-content-end align-items-center mt-3"
+          >
+            <div>
+              <h3 class="mb-2"><u>Summary</u></h3>
+              <h5 class="net-record"></h5>
+              <h5 class="most-frequent-member"></h5>
+              <h5 class="number-of-commits"></h5>
+            </div>
+          </div>
+        </div>
+        <!-- Individual Report -->
+        <div
+          id="right-screen-individual"
+          class="col-sm-10 col-lg-10 p-0 right-screen"
+        >
+          <form class="filtering filtering-individual d-flex flex-row">
+            <div class="mb-3 me-2">
+              <label for="yearSelectIndividual" class="form-label"
+                >Select Year</label
+              >
+              <select class="form-select" id="yearSelectIndividual">
+                <option value="">All</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+            <div class="mb-3 me-2">
+              <label for="monthSelectIndividual" class="form-label"
+                >Select Month</label
+              >
+              <select class="form-select" id="monthSelectIndividual">
+                <option value="">All</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary submit-filter">
+                Filter
+              </button>
+            </div>
+          </form>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 33vh;
+              margin-right: 1rem;
+              margin-bottom: 5rem;
+            "
+          >
+            <h1>Earnings By Categories</h1>
+            <canvas id="individual-chart-income"></canvas>
+            <h4 class="text-center" id="individual-total-earnings"></h4>
+          </div>
+          <div
+            id="chart-container"
+            style="width: 45%; height: 33vh; margin-bottom: 5rem"
+          >
+            <h1>Expenses By Categories</h1>
+            <canvas id="individual-chart-expenses"></canvas>
+            <h4 class="text-center" id="individual-total-expenses"></h4>
+          </div>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 40vh;
+              margin-right: 1rem;
+              margin-top: 1rem;
+              margin-bottom: 2rem;
+            "
+          >
+            <h1>Yearly Earnings Trend</h1>
+            <canvas id="chart-earnings-trend"></canvas>
+          </div>
+          <div
+            id="chart-container"
+            style="
+              width: 45%;
+              height: 40vh;
+              margin-right: 1rem;
+              margin-top: 1rem;
+              margin-bottom: 2rem;
+            "
+          >
+            <h1>Yearly Expenses Trend</h1>
+            <canvas id="chart-expenses-trend"></canvas>
+          </div>
+        </div>
+        <!-- Your Tracker -->
+        <div
+          id="right-screen-your-tracker"
+          class="right-screen col-sm-10 col-lg-10 p-0 align-items-start align-items-stretch mt-5"
+        >
+          <div class="container d-flex flex-column">
+            <div class="row row-cols-2 g-3 flex-grow-1">
+              <div class="col-1 first-row">
+                <div class="container welcome-message m-1">
+                  <h1>Welcome To Money Tracker</h1>
+                </div>
+              </div>
+              <div class="col-7 first-row">
+                <div
+                  class="container d-flex flex-row align-items-start justify-content-start name-card"
+                >
+                  <div class="circle-container m-0 p-0">
+                    <img class="profile-image" alt="Profile Image" />
+                  </div>
+                  <div
+                    class="container plus-icon d-flex justify-content-center align-items-center me-2 ms-0"
+                  >
+                    <button
+                      class="add-photo"
+                      data-bs-toggle="modal"
+                      data-bs-target="#image-modal"
+                    >
+                      <i class="fa fa-solid fa-plus"> </i>
+                    </button>
+                  </div>
+                  <!-- Modal -->
+                  <div id="image-modal" class="modal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <button
+                          class="btn-close image-modal-close"
+                          data-bs-dismiss="modal"
+                          data-bs-target="#image-modal"
+                          aria-label="Close"
+                        ></button>
+                        <div class="modal-body">
+                          <form autocomplete="off" id="form-image-modal">
+                            <div
+                              class="image-input-container d-flex justify-content-center align-items-center"
+                            >
+                              <input
+                                type="file"
+                                id="image-input"
+                                accept="image/*"
+                                name="image"
+                              />
+                            </div>
+                            <div
+                              id="upload-succeeded"
+                              style="color: green"
+                            ></div>
+                            <div id="upload-failed" style="color: red"></div>
+                            <button
+                              type="submit"
+                              id="upload-btn"
+                              class="btn btn-primary"
+                            >
+                              Upload File
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+                  <div class="container ps-0 ms-0 pe-5 personal-info ms-0 ps-0">
+                    <h5 id="name" style="margin-top: 2rem">Full Name:</h5>
+                    <h5 id="email">Email:</h5>
+                    <h5 id="generation">Generation:</h5>
+                    <br />
+                    <br />
+                    <h5 id="total-earnings-current-year"></h5>
+                    <h5 id="total-expenses-current-year"></h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 gap-3 first-row">
+                <div
+                  class="box intro-container container-fluid p-2 m-1 pb-0 mb-0 me-2"
+                >
+                  <h2>Instructions:</h2>
+                  <p>
+                    To use the money tracker, simply select from the
+                    bottom-right buttons for
+                    <b>adding, removing or modifying</b> the items associated
+                    with money. Changes will be reflected at real time and you
+                    can view the most updated data in Individual Report and
+                    Family Report. Please select the <b>Money Type</b> as it
+                    will prompts you the table on the left for the correct
+                    operation to the database. We strongly encourage you to
+                    review the data before deleting them as they will be deleted
+                    permanently without records kept on the database. Changes
+                    will be reflected at real time and all members in the family
+                    will be able to see the updated graphs.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-8">
+                <div class="container">
+                  <u><h3>Money Tracking Form</h3></u>
+                  <!-- Form for add items -->
+                  <form id="add-earnings" class="main-form">
+                    <!-- Remember to delete novalidate -->
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="title"
+                        class="form-control"
+                        placeholder="Place the title here"
+                        autocomplete="off"
+                        name="title"
+                      />
+                      <label for="title">Title</label>
+
+                      <div class="invalid-feedback">Invalid Title</div>
+                      <div class="valid-feedback">Valid Title</div>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="received_from"
+                        class="form-control"
+                        placeholder="please enter who you receive the money from"
+                        autocomplete="off"
+                        name="received_from"
+                      />
+                      <label for="received_from">Received From</label>
+
+                      <div class="invalid-feedback">Invalid Field</div>
+                      <div class="valid-feedback">Valid Field</div>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                      <input
+                        type="date"
+                        id="received_date"
+                        class="form-control"
+                        placeholder="please enter the date on which you received the money"
+                        autocomplete="off"
+                        name="received_date"
+                      />
+                      <label for="received_date">Received Date</label>
+
+                      <div class="invalid-feedback">Invalid Date Format</div>
+                      <div class="valid-feedback">Valid Date Format</div>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="monetary_value"
+                        class="form-control"
+                        placeholder="please enter the value of the money"
+                        autocomplete="off"
+                        name="monetary_value"
+                      />
+                      <label for="monetary_value">Monetary Value</label>
+
+                      <div class="invalid-feedback">Invalid Monetary Value</div>
+                      <div class="valid-feedback">Valid Monetary Value</div>
+                    </div>
+
+                    <div id="submit-earnings-failed" style="color: red"></div>
+                    <div
+                      id="submit-earnings-succeeded"
+                      style="color: green"
+                    ></div>
+
+                    <button class="btn btn-lg btn-primary">Submit</button>
+                  </form>
+                  <form hidden id="add-expenses" class="main-form">
+                    <!-- Remember to delete novalidate -->
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="title"
+                        class="form-control"
+                        placeholder="Place the title here"
+                        autocomplete="off"
+                        name="title"
+                      />
+                      <label for="title">Title</label>
+
+                      <div class="invalid-feedback">Invalid Title</div>
+                      <div class="valid-feedback">Valid Title</div>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="paid_to"
+                        class="form-control"
+                        placeholder="Place the person you paid your money to here"
+                        autocomplete="off"
+                        name="paid_to"
+                      />
+                      <label for="paid_to">Paid To</label>
+
+                      <div class="invalid-feedback">Invalid Field</div>
+                      <div class="valid-feedback">Valid Field</div>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="date"
+                        id="paid_date"
+                        class="form-control"
+                        placeholder="Place the time you paid your money here"
+                        autocomplete="off"
+                        name="paid_date"
+                      />
+                      <label for="paid_date">Paid Date</label>
+
+                      <div class="invalid-feedback">Invalid Date Format</div>
+                      <div class="valid-feedback">Valid Date Format</div>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="monetary_value"
+                        class="form-control"
+                        placeholder="please enter the value of the money"
+                        autocomplete="off"
+                        name="monetary_value"
+                      />
+                      <label for="monetary_value">Monetary Value</label>
+
+                      <div class="invalid-feedback">Invalid Monetary Value</div>
+                      <div class="valid-feedback">Valid Monetary Value</div>
+                    </div>
+                    <div id="submit-expenses-failed" style="color: red"></div>
+                    <div
+                      id="submit-expenses-succeeded"
+                      style="color: green"
+                    ></div>
+                    <button class="btn btn-lg btn-primary">Submit</button>
+                  </form>
+
+                  <!-- forms for Mod -->
+                  <form hidden id="mod-earnings" class="main-form">
+                    <!-- Pick by user -->
+                    <div class="container ps-0 earnings-collection">
+                      <h4 style="color: rgb(23, 34, 164)">
+                        Select Item to Modify:
+                      </h4>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="title"
+                        class="form-control"
+                        placeholder="Place the title here"
+                        autocomplete="off"
+                        name="title"
+                      />
+                      <label for="title">Title</label>
+
+                      <div class="invalid-feedback">Invalid Title</div>
+                      <div class="valid-feedback">Valid Title</div>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="received_from"
+                        class="form-control"
+                        placeholder="please enter who you receive the money from"
+                        autocomplete="off"
+                        name="received_from"
+                      />
+                      <label for="received_from">Received From</label>
+
+                      <div class="invalid-feedback">Invalid Field</div>
+                      <div class="valid-feedback">Valid Field</div>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                      <input
+                        type="date"
+                        id="received_date"
+                        class="form-control"
+                        placeholder="please enter the date on which you received the money"
+                        autocomplete="off"
+                        name="received_date"
+                      />
+                      <label for="received_date">Received Date</label>
+
+                      <div class="invalid-feedback">Invalid Date Format</div>
+                      <div class="valid-feedback">Valid Date Format</div>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="monetary_value"
+                        class="form-control"
+                        placeholder="please enter the value of the money"
+                        autocomplete="off"
+                        name="monetary_value"
+                      />
+                      <label for="monetary_value">Monetary Value</label>
+
+                      <div class="invalid-feedback">Invalid Monetary Value</div>
+                      <div class="valid-feedback">Valid Monetary Value</div>
+                    </div>
+
+                    <div id="mod-earnings-failed" style="color: red"></div>
+                    <div id="mod-earnings-succeeded" style="color: green"></div>
+                    <button class="btn btn-lg btn-primary">Submit</button>
+                  </form>
+
+                  <form novalidate hidden id="mod-expenses" class="main-form">
+                    <!-- Pick by users -->
+                    <div class="container ps-0 expenses-collection">
+                      <h4 style="color: rgb(23, 34, 164)">
+                        Select Item to Modify:
+                      </h4>
+                    </div>
+                    <!-- Remember to delete novalidate -->
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="title"
+                        class="form-control"
+                        placeholder="Place the title here"
+                        autocomplete="off"
+                        name="title"
+                      />
+                      <label for="title">Title</label>
+
+                      <div class="invalid-feedback">Invalid Title</div>
+                      <div class="valid-feedback">Valid Title</div>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="paid_to"
+                        class="form-control"
+                        placeholder="Place the person you paid your money to here"
+                        autocomplete="off"
+                        name="paid_to"
+                      />
+                      <label for="paid_to">Paid To</label>
+
+                      <div class="invalid-feedback">Invalid Field</div>
+                      <div class="valid-feedback">Valid Field</div>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="date"
+                        id="paid_date"
+                        class="form-control"
+                        placeholder="Place the time you paid your money here"
+                        autocomplete="off"
+                        name="paid_date"
+                      />
+                      <label for="paid_date">Paid Date</label>
+
+                      <div class="invalid-feedback">Invalid Date Format</div>
+                      <div class="valid-feedback">Valid Date Format</div>
+                    </div>
+                    <div class="form-floating mb-2">
+                      <input
+                        type="text"
+                        id="monetary_value"
+                        class="form-control"
+                        placeholder="please enter the value of the money"
+                        autocomplete="off"
+                        name="monetary_value"
+                      />
+                      <label for="monetary_value">Monetary Value</label>
+
+                      <div class="invalid-feedback">Invalid Monetary Value</div>
+                      <div class="valid-feedback">Valid Monetary Value</div>
+                    </div>
+                    <div id="mod-expenses-failed" style="color: red"></div>
+                    <div id="mod-expenses-succeeded" style="color: green"></div>
+                    <button class="btn btn-lg btn-primary">Submit</button>
+                  </form>
+
+                  <!-- Forms for Del -->
+                  <form hidden id="del-earnings" class="main-form">
+                    <div class="container ps-0 del-earnings-collection">
+                      <h4 style="color: rgb(23, 34, 164)">
+                        Select Item to Delete:
+                      </h4>
+                    </div>
+                    <h6 style="color: red">
+                      Be careful as the data cannot be found back after the
+                      deletion!
+                    </h6>
+                    <div id="del-earnings-failed" style="color: red"></div>
+                    <div id="del-earnings-succeeded" style="color: green"></div>
+
+                    <button class="btn btn-lg btn-primary">Submit</button>
+                  </form>
+
+                  <form hidden id="del-expenses" class="main-form">
+                    <div class="container ps-0 del-expenses-collection">
+                      <h4 style="color: rgb(23, 34, 164)">
+                        Select Item to Delete:
+                      </h4>
+                    </div>
+                    <h6 style="color: red">
+                      Be careful as the data cannot be found back after the
+                      deletion!
+                    </h6>
+                    <div id="del-expenses-failed" style="color: red"></div>
+                    <div id="del-expenses-succeeded" style="color: green"></div>
+                    <button class="btn btn-lg btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="container">
+                  <div id="container select-top pb-2 m-0">
+                    <h3 class="pb-2 mt-2">Select Financial Type:</h3>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="earningsRadio"
+                        checked
+                      />
+                      <label class="form-check-label" for="earningsRadio">
+                        <h5>Earnings</h5>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="expensesRadio"
+                      />
+                      <label class="form-check-label" for="expensesRadio">
+                        <h5>Expenses</h5>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="container select-bottom m-0 ps-0 pt-3">
+                    <h3 class="pb-2">Select Operations:</h3>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefaultSecond"
+                        id="add-item-btn"
+                        checked
+                      />
+                      <label class="form-check-label" for="add-item-btn">
+                        <h5>Add Item</h5>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefaultSecond"
+                        id="mod-item-btn"
+                      />
+                      <label class="form-check-label" for="mod-item-btn">
+                        <h5>Modify Item</h5>
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefaultSecond"
+                        id="delete-item-btn"
+                      />
+                      <label class="form-check-label" for="delete-item-btn">
+                        <h5>Delete Item</h5>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="right-screen-members"
+          class="right-screen col-sm-10 col-lg-10 p-0 gap-2"
+        ></div>
+        <div
+          id="right-screen-contact"
+          class="col-sm-10 col-lg-10 p-0 gap-2 d-flex flex-column justify-content-start"
+        >
+          <div class="container-fluid">
+            <h1><u>Contact for Help</u></h1>
+            <h3>Software Developler: Owen Zheng</h3>
+            <h3>Service Head: John Ma</h3>
+            <h3>Service Team Phone Number: 778-512-4998</h3>
+            <h3>Email: owen04@student.ubc.ca</h3>
+            <br />
+            <h4 style="color: green">
+              Note that our services only open on weekdays from 9am to 10pm
+              (PDT). However, it is strongly adviced to serve you via email.
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'client/script.js' %}" defer></script>
+  </body>
+</html>

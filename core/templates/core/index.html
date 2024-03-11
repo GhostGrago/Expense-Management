@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Tilt+Prism&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/9f0dc4de76.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}" />
+    <title>Family Money Tracker</title>
+  </head>
+  <body>
+    <div class="container-xxl">
+      <div class="title1 title-blue">
+        <h2 class="header">Family Money Tracker Backend Server</h2>
+        <h3>&copy;Owen Zheng</h3>
+
+        <div class="card-group">
+          <div class="container">
+            <div class="d-flex align-items-stretch justify-content-center">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Project Overview</h3>
+                  <div class="card-text">
+                    <p>
+                      A back-end management system with RESTful api to keep
+                      track with every family's income and expenses.
+                    </p>
+                  </div>
+                  <img
+                    class="calculator card-img-bottom"
+                    src="{% static 'core/calc.png' %}"
+                    alt="calculator"
+                  />
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Tech Stack</h3>
+                  <br />
+                  <h5 class="card-subtitle">
+                    <i
+                      >Major Technologies: Python, Django, RESTful API, MySQL,
+                      Locust, Pytest, JWT Auth</i
+                    >
+                  </h5>
+                  <br />
+                  <div class="card-text">
+                    <p>
+                      Built on Django's Rest Framework and JWT authentication,
+                      the platform ensures secure user access. Unauthorized
+                      users are restricted from endpoints, with data isolation
+                      preventing users from accessing other family's
+                      information. Django ORM helps manipulate on the database
+                      server, while automated and performance test guarantee
+                      smooth performance under high user loads while minimize
+                      errors.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <i id="arrow" class="fa fa-2x fa-solid fa-arrow-down"></i>
+      </div>
+    </div>
+    <div class="container-xxl">
+      <div class="title2 title-white">
+        <h1 class="header"><b>Complete Mannual For Developers</b></h1>
+        <div class="body mb-3">
+          <h2 style="color: red">
+            Base URL (MUST be refered to when sending http requests):
+          </h2>
+          <p style="color: rgb(0, 98, 255)">
+            It is the same as the current page's URL:
+            https://moneytracker-prod-9941b1d428c3.herokuapp.com.
+          </p>
+        </div>
+        <div class="body mb-3">
+          <h2>User Login and Authentication:</h2>
+          <ol>
+            <li>
+              <p>
+                Create a user through authentication endpoint by entering first
+                name, last name, password and email by appending the following
+                to the base url:
+                <a class="link--secondary">/auth/users/</a>.
+              </p>
+            </li>
+            <li>
+              <p>
+                After doing so, generate access token through /jwt/create/.
+                Remember to save the token locally using front-end technologies
+                like LocalStorage in Javascript.
+              </p>
+            </li>
+            <p>
+              <b
+                >IMPORTANT: Unauthorized users cannot access certain endpoints.
+                Authorized users can only access their own family and individual
+                data.</b
+              >
+              <br />
+            </p>
+          </ol>
+        </div>
+        <div class="body mb-3">
+          <h2>Family Creation:</h2>
+          <p>
+            Along with your JWT authentication header, you can create a family
+            by navigating to <a class="link--secondary">/tracker/families/</a>
+            endpoint. Input the family name for your family and a password. The
+            password here is not for accessing a family, but for our service
+            desk to check your identity. Instead, a family code will be
+            generated and that will be used for future secure access and
+            management of your own family.
+          </p>
+        </div>
+        <div class="body mb-3">
+          <h2>Linking Members to Family:</h2>
+          <ol>
+            <li>
+              <p>
+                Before linking the user with the family, we need to extract the
+                user's user id by navigating to
+                <a class="link--secondary">/tracker/my-profile/me/</a>.
+              </p>
+            </li>
+            <li>
+              <p>
+                After a member is created, head over to
+                <a class="link--secondary"> /tracker/families/::family_id/</a>
+                endpoint to view the family profile or rename the family. Once
+                checked, navigate to
+                <a class="link--secondary">
+                  /tracker/families/::family_id/members/</a
+                >
+                endpoint; enter your member id in order to link yourself to the
+                family.
+              </p>
+            </li>
+            <p>
+              <i
+                >Note: Unlinking members is also possible by sending a POST
+                request via endpoint
+              </i>
+              <a class="link--secondary"
+                >/tracker/families/::family_id/members/::
+                member_id/unlink-member/</a
+              >.
+            </p>
+          </ol>
+        </div>
+        <div class="body mb-3">
+          <h2>Operating Family Member's Earnings & Expenses:</h2>
+          <ol>
+            <li>
+              <p>
+                To view earnings, expenses and net or post earnings and
+                expenses: append the base url by
+                <a class="link--secondary"
+                  >/tracker/families/::family_id/members/::
+                  member_id/earnings/</a
+                >. Change earnings/ to expenses/ or records/ to view the rest.
+                To post new earnings or expenses, simply follow the instruction
+                and hit POST. However, we do not allow POST to records endpoint
+                directly. NOTE: Sorting is allowed through filter button
+                entering year and month to get a monthly report.
+              </p>
+            </li>
+            <li>
+              <p>
+                To update or delete an earning or expenses, navigate to
+                <a class="link--secondary"
+                  >/tracker/families/::family_id/members/::
+                  member_id/earnings/::earning_id/</a
+                >. Similar than before, earnings can be substituded by expenses.
+                However, the record is one entity which does not come with
+                record_id. Delete the earnings or expenses by hitting sending
+                the delete request on the same url.
+              </p>
+            </li>
+            <li>
+              <p>
+                To view the net income of this individual: append the base url
+                by
+                <a class="link--secondary"
+                  >/tracker/families/::family_id/members/::
+                  member_id/records/</a
+                >. NOTE: Sorting is allowed by appending querystrings to the
+                current url. (eg. ?earning__received_date__month=9
+                &expense__paid_date__month=6)
+              </p>
+            </li>
+          </ol>
+        </div>
+        <div class="body mb-3">
+          <h2>Viewing Family Records:</h2>
+          <p>
+            Similar to viewing individual member's record, it is also possible
+            to view a list of all member's earnings, expenses in a family. The
+            BEAUTY here is that the family net income is calculated down below
+            and can be filtered by entering years and months. Just navigate to
+            <a class="link--secondary"
+              >tracker/families/::family_id/records/.</a
+            >
+            <br />
+            <br />
+            <b>
+              IMPORTANT: All the info related to family or individual earnings,
+              expenses, and the net are hidden from people who have not linked
+              themselves to your family. Don't worry about the security issue as
+              it has been taken care of that for you.
+            </b>
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'core/script.js' %}" defer></script>
+  </body>
+</html>

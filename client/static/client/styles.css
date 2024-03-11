@@ -1,0 +1,126 @@
+@import "./normalize.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.nav-pills li a:hover {
+  background-color: rgb(0, 170, 255);
+  cursor: pointer;
+}
+
+.nav-bottom a:hover {
+  background-color: rgb(60, 60, 73);
+}
+
+.right-screen {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.filtering {
+  position: absolute;
+  top: 0.5%;
+  right: 4%;
+}
+
+.submit-filter {
+  margin-top: 2rem;
+}
+
+.circle-container {
+  width: 200px;
+}
+
+.circle-container img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.plus-icon {
+  width: 10px;
+  height: 20px;
+  border-style: solid;
+  border-radius: 50%;
+  translate: -20px;
+  background-color: rgb(207, 158, 238);
+}
+
+.intro-container {
+  background-color: rgb(149, 231, 205);
+}
+
+.intro-container p {
+  font-size: 1.3rem;
+}
+
+.box {
+  overflow: hidden;
+  background-color: lightgray;
+}
+
+.add-photo {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.image-input-container {
+  height: 7vh;
+}
+
+.modal-dialog {
+  width: fit-content;
+}
+
+@media screen and (max-width: 1240px) {
+  .intro-container h2 {
+    font-size: 0.9rem;
+  }
+
+  .intro-container p {
+    font-size: 0.8rem;
+  }
+
+  .circle-container {
+    width: 150px;
+  }
+
+  .circle-container img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .welcome-message {
+    font-size: 0.6rem;
+  }
+
+  .personal-info h5 {
+    font-size: 0.7rem;
+  }
+}
+
+.form-check label {
+  font-size: 2rem;
+}
+
+.first-row {
+  height: 30vh;
+}
